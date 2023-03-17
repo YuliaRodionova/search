@@ -7,9 +7,19 @@ form.onsubmit = function (event) {
     const resultText = document.querySelector('.result');
     const value = input.value;
 
-    if (value == '') {
-        return false;
+    if (value == '' || value.length == 1) {
+        input.classList.add('invalid');
+        let error = document.createElement('div');
+        error.className = 'error';
+        error.innerHTML = 'Пожалуйста, ввеедите запрос более 1 символа';
+        if (!button.nextElementSibling) {
+            button.after(error);
+        }
     } else {
+        input.classList.remove('invalid');
+        if (button.nextElementSibling) {
+            button.nextSibling.remove();
+        }
         getReps(value)
             .then(response => response.json())
             .then(reps => printReps(reps, value))
