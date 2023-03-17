@@ -7,7 +7,7 @@ form.onsubmit = function (event) {
     const resultText = document.querySelector('.result');
     const value = input.value;
 
-    if (value == '' || value.length == 1) {
+    if (value.replace(/ /g, '') === '' || value.replace(/ /g, '').length < 2) {
         input.classList.add('invalid');
         let error = document.createElement('div');
         error.className = 'error';
